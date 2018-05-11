@@ -15,6 +15,11 @@ class Operation extends Model
 
     protected $guarded = ['id'];
 
+    /**
+     * Operation constructor.
+     * @param null $operId
+     * @param array $attributes
+     */
     public function __construct($operId = null,array $attributes = [])
     {
         parent::__construct($attributes);
@@ -23,6 +28,15 @@ class Operation extends Model
             $this->id = $operId;
     }
 
+    /**
+     * Создание операции
+     * @param null $type
+     * @param $partnerCode
+     * @param null $externalId
+     * @param null $pointsSpend
+     * @param null $pointsEarned
+     * @return null
+     */
     public function make($type = null,$partnerCode,$externalId = null,$pointsSpend = null,$pointsEarned = null)
     {
 
@@ -45,6 +59,18 @@ class Operation extends Model
 
     }
 
+    /**
+     * Получение списка операций
+     * @param $partnerCode
+     * @param null $walletId
+     * @param bool $cancelled
+     * @param array $types_arr
+     * @param string $order
+     * @param int $limit
+     * @param $dateFrom
+     * @param $dateTo
+     * @return mixed
+     */
     public function getList($partnerCode,$walletId = null,$cancelled = true,array $types_arr = [],$order = "DESC",$limit = 1000,$dateFrom,$dateTo)
     {
 
@@ -53,6 +79,14 @@ class Operation extends Model
         return $operations;
     }
 
+    /**
+     * Отмена операции
+     * @param $partnerCode
+     * @param $externalId
+     * @param null $refundAmount
+     * @return bool
+     * @throws UserApiException
+     */
     public function refund($partnerCode,$externalId,$refundAmount = null)
     {
 

@@ -17,6 +17,9 @@ class LKController extends Controller
 
     }
 
+    /**
+     * @return $this
+     */
     public function showMainPage()
     {
 
@@ -37,6 +40,9 @@ class LKController extends Controller
 
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showAddWallet()
     {
 
@@ -44,6 +50,9 @@ class LKController extends Controller
 
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showNewWallet()
     {
 
@@ -51,6 +60,10 @@ class LKController extends Controller
 
     }
 
+    /**
+     * @param MakeWalletRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function makePersonalWallet(MakeWalletRequest $request)
     {
 
@@ -64,6 +77,10 @@ class LKController extends Controller
 
     }
 
+    /**
+     * @param MakeSharedWalletRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function makeSharedlWallet(MakeSharedWalletRequest $request)
     {
 
@@ -79,16 +96,26 @@ class LKController extends Controller
 
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showWalletSettings()
     {
         return view('options-purse');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showWalletIdentification()
     {
         return view('Identification');
     }
 
+    /**
+     * @param IdentSettingsRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function saveIdentSettings(IdentSettingsRequest $request)
     {
         $input = $request->all();

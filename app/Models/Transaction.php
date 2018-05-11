@@ -12,6 +12,12 @@ class Transaction extends Model
 
     protected $guarded = ['id'];
 
+    /**
+     * Получить транзакции кошелька
+     * @param $walletId
+     * @param null $limit
+     * @return array
+     */
     public function get($walletId,$limit = null)
     {
 
@@ -24,6 +30,11 @@ class Transaction extends Model
      ];
     }
 
+    /**
+     * Получить количество транзакций кошелька
+     * @param $walletId
+     * @return mixed
+     */
     public function count($walletId)
     {
 

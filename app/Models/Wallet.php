@@ -17,12 +17,21 @@ class Wallet extends Model
 
     protected $walletId;
 
+    /**
+     * Wallet constructor.
+     * @param null $walletId
+     * @param array $attributes
+     */
     public function __construct($walletId = null,array $attributes = [])
     {
         $this->walletId = $walletId;
         parent::__construct($attributes);
     }
 
+    /**
+     * Связь с моделью User
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function users()
     {
         return $this->belongsToMany('App\Models\User','wallets_users');
@@ -57,6 +66,10 @@ class Wallet extends Model
 
     }
 
+    /**
+     * Создание баланса кошелька
+     * @param $walletId
+     */
     private function makeBalance($walletId)
     {
 
@@ -66,7 +79,11 @@ class Wallet extends Model
 
     }
 
-    //Связывает пользователя и кошелёк
+    /**
+     * Связывает пользователя и кошелёк
+     * @param $userId
+     * @param $wallId
+     */
     public function bindUser($userId,$wallId)
     {
 
@@ -78,6 +95,10 @@ class Wallet extends Model
 
     }
 
+    /**
+     * Активация кошелька
+     * @return mixed
+     */
     public function activate()
     {
 
@@ -89,11 +110,21 @@ class Wallet extends Model
 
     }
 
+    /**
+     * Информация о кошельке
+     * @return mixed
+     */
     public function getInfo()
     {
         return SelectRawSql::selectWalletInfo($this->walletId);
     }
 
+    /**
+     * Списание средств
+     * @param $amount
+     * @return mixed
+     * @throws UserApiException
+     */
     public function writeOff($amount)
     {
 
@@ -115,6 +146,11 @@ class Wallet extends Model
 
     }
 
+    /**
+     * Пополнение средств
+     * @param $amount
+     * @return mixed
+     */
     public function writeOn($amount)
     {
 
@@ -130,11 +166,19 @@ class Wallet extends Model
 
     }
 
+    /**
+     * Получить баланс(модель)
+     * @return mixed
+     */
     public function getBalance()
     {
         return $this->balanceAsTable()->balance;
     }
 
+    /**
+     * Получить баланс(таблица)
+     * @return mixed
+     */
     public function balanceAsTable()
     {
 
@@ -148,6 +192,13 @@ class Wallet extends Model
 
     }
 
+    /**
+     * Поиск кошельков по параметрам
+     * @param $partnerCode
+     * @param $phone
+     * @param $params
+     * @return mixed
+     */
     public function search($partnerCode,$phone,$params)
     {
 

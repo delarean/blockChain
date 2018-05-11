@@ -18,6 +18,10 @@ class User extends Model
 
     public $info;
 
+    /**
+     * User constructor.
+     * @param array $attributes
+     */
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
@@ -25,6 +29,12 @@ class User extends Model
         $this->info = $this->getCurrentUser();
     }
 
+    /**
+     * Базовая регистрация для любого типа пользователей
+     * @param $email
+     * @param $password
+     * @return mixed
+     */
     public function baseRegistration($email,$password)
     {
 
@@ -38,11 +48,19 @@ class User extends Model
 
     }
 
+    /**
+     * Связь с моделью Partner
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function partner()
     {
-        return $this->hasOne('App\Partner');
+        return $this->hasOne('App\Models\Partner');
     }
 
+    /**
+     * Залогинить пользователя
+     * @param $user_id
+     */
     public function login($user_id)
     {
 
@@ -52,6 +70,10 @@ class User extends Model
 
     }
 
+    /**
+     * Получить данные из сессии о текущем пользователе
+     * @return bool|\Illuminate\Session\SessionManager|\Illuminate\Session\Store|mixed
+     */
     public function getCurrentUser()
     {
         if(!$this->isLogin())
@@ -61,6 +83,10 @@ class User extends Model
 
     }
 
+    /**
+     * Получить модель текущего пользователя
+     * @return bool
+     */
     public function getCurrentUserModel()
     {
 
@@ -71,6 +97,10 @@ class User extends Model
 
     }
 
+    /**
+     * Проверка ,залогинен ли пользователь
+     * @return bool
+     */
     public function isLogin()
     {
         if(!session()->has('user'))
@@ -79,6 +109,12 @@ class User extends Model
             return true;
     }
 
+    /**
+     * Проверка логина и пароля
+     * @param $email
+     * @param $password
+     * @return bool
+     */
     public function attemptLogin($email,$password)
     {
 
@@ -93,11 +129,19 @@ class User extends Model
 
     }
 
+    /**
+     * Связь с моделью Wallet
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function wallets()
     {
         return $this->belongsToMany('App\Models\Wallet','wallets_users');
     }
 
+    /**
+     * Получение персонального кошелька пользователя
+     * @return mixed
+     */
     public function getPersonalWallet()
     {
         $user = $this->getCurrentUserModel();
@@ -110,6 +154,10 @@ class User extends Model
 
     }
 
+    /**
+     * Получение списка транзакций с участием пользователя
+     * @return array
+     */
     public function getTransactions()
     {
 

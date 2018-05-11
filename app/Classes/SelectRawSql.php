@@ -5,9 +5,17 @@ namespace App\Classes;
 
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Выборка с ипользованием чистого sql
+ * @package App\Classes
+ */
 class SelectRawSql
 {
-
+    /**
+     * Выбрать информацию о кошельке
+     * @param $walletId
+     * @return mixed
+     */
     public static function selectWalletInfo($walletId)
     {
 
@@ -36,6 +44,18 @@ class SelectRawSql
 
     }
 
+    /**
+     * Выбрать список операций
+     * @param $partnerCode
+     * @param null $walletId
+     * @param bool $cancelled
+     * @param array $types_arr
+     * @param string $order
+     * @param int $limit
+     * @param $dateFrom
+     * @param $dateTo
+     * @return mixed
+     */
     public static function selectOperationsList($partnerCode,$walletId = null,$cancelled = true,array $types_arr = [],$order = "DESC",$limit = 1000,$dateFrom,$dateTo)
     {
         if($cancelled === true || $cancelled === 'true')
@@ -94,6 +114,13 @@ class SelectRawSql
 
     }
 
+    /**
+     * Выбрать кошельки по параметрам
+     * @param $partnerCode
+     * @param $phone
+     * @param $params
+     * @return mixed
+     */
     public static function selectCards($partnerCode,$phone,$params)
     {
 
@@ -148,6 +175,12 @@ class SelectRawSql
 
     }
 
+    /**
+     * Выбрать транзакции с участием кошелька
+     * @param $walletId
+     * @param $limit
+     * @return mixed
+     */
     public static function selectTransactions($walletId,$limit)
     {
         $sql_statement = "

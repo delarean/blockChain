@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-
 class Client extends Model
 {
 
@@ -15,6 +14,12 @@ class Client extends Model
 
     protected $guarded = ['id'];
 
+    /**
+     * Регистрация клиента
+     * @param $email
+     * @param $password
+     * @return bool
+     */
     public function registrate($email,$password)
     {
 
@@ -32,6 +37,8 @@ class Client extends Model
             $wallet = (new Wallet())->make($user_id);
 
         });
+
+        return true;
 
     }
 
