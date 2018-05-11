@@ -2,4 +2,5 @@
 *.css linguist-vendored=false
 *.scss linguist-vendored=false
 *.js linguist-vendored=false
+*.html linguist-vendored=false
 CHANGELOG.md export-ignore
