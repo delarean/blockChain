@@ -3,5 +3,5 @@
 *.scss linguist-vendored=false
 *.js linguist-vendored=false
 *.html linguist-vendored=false
-*.blade linguist-vendored=false
+*.blade.php linguist-vendored=false
 CHANGELOG.md export-ignore
